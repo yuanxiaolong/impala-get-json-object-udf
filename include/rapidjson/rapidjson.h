@@ -342,7 +342,9 @@ RAPIDJSON_NAMESPACE_END
 #ifndef RAPIDJSON_ASSERT
 //#include <cassert>
 //#define RAPIDJSON_ASSERT(x) assert(x)
-#define RAPIDJSON_ASSERT(x) do{if(false == (x)) throw 0;}while(0);
+#include <iostream>
+#include <string>
+#define RAPIDJSON_ASSERT(x) do{if(false == (x)) cout<<"Json error!"<<endl;}while(0);
 #endif // RAPIDJSON_ASSERT
 
 ///////////////////////////////////////////////////////////////////////////////
