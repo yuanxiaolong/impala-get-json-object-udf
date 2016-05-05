@@ -44,6 +44,8 @@ StringVal JsonGetObject(FunctionContext *context, const StringVal & jsonVal, con
     if (jsonVal.is_null) return StringVal::null();
     if (selectorVal.is_null) return StringVal::null();
 
+
+try {
     std::string json((const char*)jsonVal.ptr, jsonVal.len);
     std::string selector((const char*)selectorVal.ptr, selectorVal.len);
 
@@ -182,4 +184,7 @@ StringVal JsonGetObject(FunctionContext *context, const StringVal & jsonVal, con
     StringVal result(context, writtenSize);
     memcpy(result.ptr, written, writtenSize);
     return result;
+}catch(int e){
+    return StringVal::null();
+}
 }
