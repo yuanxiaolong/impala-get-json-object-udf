@@ -41,11 +41,11 @@
 #include <inttypes.h>
 
 StringVal JsonGetObject(FunctionContext *context, const StringVal & jsonVal, const StringVal & selectorVal) {
+
+try {
     if (jsonVal.is_null) return StringVal::null();
     if (selectorVal.is_null) return StringVal::null();
 
-
-try {
     std::string json((const char*)jsonVal.ptr, jsonVal.len);
     std::string selector((const char*)selectorVal.ptr, selectorVal.len);
 
