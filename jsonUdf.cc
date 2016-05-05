@@ -184,7 +184,7 @@ try {
     StringVal result(context, writtenSize);
     memcpy(result.ptr, written, writtenSize);
     return result;
-}catch(int e){
+}catch(char e){
     return StringVal::null();
 }
 }
