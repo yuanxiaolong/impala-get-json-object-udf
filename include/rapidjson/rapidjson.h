@@ -344,7 +344,7 @@ RAPIDJSON_NAMESPACE_END
 //#define RAPIDJSON_ASSERT(x) assert(x)
 #include <iostream>
 #include <string>
-#define RAPIDJSON_ASSERT(x) do{if(false == (x)){throw 'error';};}while(0);
+#define RAPIDJSON_ASSERT(x) do{if(false == (x)){throw 'e';};}while(0);
 #endif // RAPIDJSON_ASSERT
 
 ///////////////////////////////////////////////////////////////////////////////
