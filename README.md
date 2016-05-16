@@ -2,7 +2,7 @@
 A UDF for Cloudera Impala ( hive get_json_object equivalent )
 
 ## build
-- cmake .
+- cmake . or cmake . -DCMAKE_BUILD_TYPE=Release
 - make
 
 ## install

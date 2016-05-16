@@ -30,6 +30,8 @@ include_directories("include")
 # src-file-ir target that can be built.
 # e.g. COMPILE_TO_IR(test.cc) generates the "test-ir" make target.
 set(IR_COMPILE_FLAGS "-emit-llvm" "-O3" "-c" "-Iinclude")
+set(CMAKE_BUILD_TYPE "Release")
+
 function(COMPILE_TO_IR SRC_FILE)
   get_filename_component(BASE_NAME ${SRC_FILE} NAME_WE)
   set(OUTPUT_FILE "build/${BASE_NAME}.ll")
@@ -45,11 +47,19 @@ add_library(jsonUdf SHARED jsonUdf.cc)
 
 # Custom targest to cross compile UDA/UDF to ir
 if (CLANG_EXECUTABLE)
-  COMPILE_TO_IR(jsonUdf.cc )
+  COMPILE_TO_IR(jsonUdf.cc)
 endif(CLANG_EXECUTABLE)
+
+## Build the UDA/UDFs into a shared library.
+#add_library(jsonUdf SHARED jsonUdf-new.cc)
+#
+## Custom targest to cross compile UDA/UDF to ir
+#if (CLANG_EXECUTABLE)
+#  COMPILE_TO_IR(jsonUdf-new.cc)
+#endif(CLANG_EXECUTABLE)
 
 # This is an example of how to use the test harness to help develop UDF and UDAs.
 target_link_libraries(jsonUdf ImpalaUdf)
-add_executable(jsonUdf-test jsonUdf-test.cc)
-target_link_libraries(jsonUdf-test jsonUdf)
+#add_executable(jsonUdf-test jsonUdf-test.cc)
+#target_link_libraries(jsonUdf-test jsonUdf)
 

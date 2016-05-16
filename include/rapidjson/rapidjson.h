@@ -223,7 +223,7 @@
 
 //! Whether using 64-bit architecture
 #ifndef RAPIDJSON_64BIT
-#if defined(__LP64__) || defined(_WIN64) || defined(__EMSCRIPTEN__)
+#if defined(__LP64__) || defined(_WIN64)
 #define RAPIDJSON_64BIT 1
 #else
 #define RAPIDJSON_64BIT 0
@@ -340,11 +340,13 @@ RAPIDJSON_NAMESPACE_END
           \ref RAPIDJSON_ERRORS APIs.
 */
 #ifndef RAPIDJSON_ASSERT
-//#include <cassert>
-//#define RAPIDJSON_ASSERT(x) assert(x)
-#include <iostream>
-#include <string>
-#define RAPIDJSON_ASSERT(x) do{if(false == (x)){0;};}while(0);
+//#define NDEBUG
+#include <cassert>
+//#include <iostream>
+//#define RAPIDJSON_ASSERT(x) do{if(false == (x)) { assert(x); } }while(0);
+#define RAPIDJSON_ASSERT(x) assert(x)
+//#include <string>
+//#define RAPIDJSON_ASSERT(x) do{if(false == (x)){ break; } }while(0);
 #endif // RAPIDJSON_ASSERT
 
 ///////////////////////////////////////////////////////////////////////////////

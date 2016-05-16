@@ -871,7 +871,11 @@ public:
         \note It is better to use FindMember() directly if you need the obtain the value as well.
         \note Linear time complexity.
     */
-    bool HasMember(const Ch* name) const { return FindMember(name) != MemberEnd(); }
+    bool HasMember(const Ch* name) const {
+        if(!IsObject()) {return false;}
+//        if(!IsArray())  {return false;}
+        return FindMember(name) != MemberEnd();
+    }
 
 #if RAPIDJSON_HAS_STDSTRING
     //! Check whether a member exists in the object with string object.
@@ -1211,31 +1215,6 @@ public:
         std::memmove(&*pos, &*last, (MemberEnd() - last) * sizeof(Member));
         data_.o.size -= (last - first);
         return pos;
-    }
-
-    //! Erase a member in object by its name.
-    /*! \param name Name of member to be removed.
-        \return Whether the member existed.
-        \note Linear time complexity.
-    */
-    bool EraseMember(const Ch* name) {
-        GenericValue n(StringRef(name));
-        return EraseMember(n);
-    }
-
-#if RAPIDJSON_HAS_STDSTRING
-    bool EraseMember(const std::basic_string<Ch>& name) { return EraseMember(GenericValue(StringRef(name))); }
-#endif
-
-    template <typename SourceAllocator>
-    bool EraseMember(const GenericValue<Encoding, SourceAllocator>& name) {
-        MemberIterator m = FindMember(name);
-        if (m != MemberEnd()) {
-            EraseMember(m);
-            return true;
-        }
-        else
-            return false;
     }
 
     //@}

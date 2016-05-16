@@ -4,3 +4,6 @@ CMakeCache.txt
 Makefile
 cmake_install.cmake
 .idea
+/include-bak
+/jsonUdf-new.h
+/jsonUdf-new.cc
